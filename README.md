@@ -1,1 +1,1 @@
-# Details in "Instructions.pdf" in the '/root'.
+# Details in "Instructions.pdf" file in the '/root'.
