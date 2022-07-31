@@ -1,0 +1,59 @@
+<div class="backdrop" >
+  <div class="modal">
+
+    <header>
+      <div>
+        <h2>{{modalData.flight}} Registration</h2>
+        <p>{{modalData.date | date:'dd/MM/YY - HH:mm'}}</p>
+      </div>
+
+      <img class="cursor" src="assets/X.png" (click)="close.emit()">
+    </header>
+
+    <main>
+      <div class="main-div">
+        <label>Registration
+        <input
+          type="text"
+          autofocus
+          [value]="inputValue"
+          [ngStyle]="{ borderColor: (inputValue.length >= minInput) &&
+                                      selectFlag ? '#18abf4' : '#d8d8d8' }"
+          (input)="onInput($event)"
+        >
+        </label>
+        <div
+          class="list"
+          *ngIf="(inputValue.length >= minInput) && selectFlag"
+        >
+          <p><strong class="strong">REGISTRATION</strong> ({{registrationSuggest.length}})</p>
+          <div class="list-options cursor" *ngFor="let reg of registrationSuggest">
+            <span
+              [id]="reg"
+              (click)="inputValue = reg; selectFlag = false"
+            ><strong
+              *ngFor="let symbol of reg.split('')"
+              [ngClass]="{ strong: inputValue.toLowerCase().includes(symbol.toLowerCase()) }"
+            >{{symbol}}</strong></span><hr>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <button
+        class="btn cursor"
+        (mouseenter)="buttonFlag = true"
+        (click)="close.emit()"
+        [ngClass]="!buttonFlag ? 'btn-cancel' : 'btn-save'"
+      >Cancel</button>
+      <button
+        class="btn cursor"
+        (click)="save.emit(inputValue)"
+        (mouseenter)="buttonFlag = false"
+        [ngClass]="buttonFlag ? 'btn-cancel' : 'btn-save'"
+      >Save</button>
+    </footer>
+
+  </div>
+</div>

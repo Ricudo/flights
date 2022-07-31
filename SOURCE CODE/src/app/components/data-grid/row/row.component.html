@@ -1,0 +1,26 @@
+<app-modal
+  *ngIf="isModal"
+  [modalData]="modalObj"
+  (close)="this.isModal = !this.isModal"
+  (save)="onSave($event)"
+></app-modal>
+
+<div class="row-container">
+    <div class="row-cell">
+        <p>{{row.flightNumber}}</p>
+    </div>
+    <div class="row-cell">
+        <p>{{row.scheduledDate | date:"dd/MM/yy" }}</p>
+    </div>
+    <div class="row-cell">
+        <p>{{row.scheduledDate | date:"hh:mm" }}</p>
+    </div>
+    <div class="row-cell">
+        <p>{{row.originDestination}}</p>
+    </div>
+    <div class="row-cell cursor"
+         (click)="openModal(row.registration, row.scheduledDate, row.flightNumber)"
+    >
+        <p>{{row.registration ? row.registration : '..........'}}</p>
+    </div>
+</div>
